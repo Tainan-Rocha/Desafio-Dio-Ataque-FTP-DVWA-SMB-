@@ -1,4 +1,4 @@
-<img width="1012" height="738" alt="image" src="https://github.com/user-attachments/assets/def5ed18-4ff2-4432-a9c3-b7294130cdde" /><img width="1012" height="738" alt="image" src="https://github.com/user-attachments/assets/d871658c-b311-4ac4-a99b-ad93f2997ba2" /># Desafio-Dio-Ataque-FTP-DVWA-SMB
+# Desafio-Dio-Ataque-FTP-DVWA-SMB
 Esse repositório será documentada os processos executados para simular ataques de força bruta em FTP, automação de tentativas em formulário web (DVWA) e e password spraying em SMB com enumeração de usuários. 
 
 ## Tecnologias
@@ -69,6 +69,6 @@ Conforme retorno do comando o usuario e senha que houve exito foi `msfadmin`.
 
 Para acessar a porta 21(FTP), realizamos o comando `ftp {IP alvo}`, será solicitado o usuario e senha, e entao digitamos msfadmin para acessar.
 
-![alt text](image-9.png)
+![alt text](msfadmin.png)
 
 Com isso estamos em acesso na porta 21, podemos importar e ou exportar arquivos por exemplo.
