@@ -77,9 +77,13 @@ Com isso estamos em acesso na porta 21, podemos importar e ou exportar arquivos 
 
 Para realizarmos o ataque a um formalario de login WEB, precisamos ter os arquivos de possiveis usuarios e senhas, conforme vimos anteriormente. Além dos arquivos, precisamos ver quais parametros a pagina irá solicitar para automatizar as tentativas de acesso.
 
+### Validar parametros esperados pela pagina
+
 Acessamos a URL `http://192.168.56.101/dvwa/login.php`, utilizando o Dev Tools do navegador, podemos ver quais parametros sao esperados na requesicao, na opcao `Network` e `Request`
 
 ![alt text](form.png)
+
+### Rodando comando para enviar requisicoes para pagina
 
 Dessa forma, podemos rodar o seguinte comando para que a ferramenta Medusa realize as tentativas de acesso de forma automatizada.
 
@@ -89,4 +93,36 @@ Dessa forma, podemos rodar o seguinte comando para que a ferramenta Medusa reali
 
 ![alt text](form_u.png)
 
-Conforme visto acima, o medusa realiza as requisicoes, está retornando `Sucess` para todos, pois no corpo HTML nao retorna nenhum parametro de falha, logo todos aparecem como sucesso. Porém o usuario de acesso é `admin` e senha `password`
+Conforme visto acima, o medusa realiza as requisicoes, está retornando `Sucess` para todos, pois no corpo HTML nao retorna nenhum parametro de falha, logo todos aparecem como sucesso. Porém o usuario de acesso é `admin` e senha `password`.
+
+## Simulando ataque em SMB com password spraying
+
+Rodamos o comando abaixo para obter informacoes de usuarios no sistema.
+
+`enum4linux -a {IP alvo}`
+
+![alt text](ipalvo.png)
+
+### Criamos arquivos para automatizar as tentivas de acessos 
+
+Com as informacoes dos usuarios, criamos o arquivo de lista de usuarios que queremos acessar e outro arquivo com possiveis senhas.
+
+### Rodando comando para descobrir acesso do SMB
+
+Realizamos o comando abaixo:
+
+`medusa -h {IP alvo} -U {arquivo com usuarios smb} -P {arquivo com possiveis senhas} -M smbnt -t 2 -T 50`
+
+![alt text](found.png)
+
+Após comando podemos ver que ele encontrou o usuário e senha de acesso `msfadmin`.
+
+### Acessando SMB
+
+Com o usuário e senha descobertos, podemos realizar o comando abaixo para acessar o terminal interativo do SMB:
+
+`smbclient //{IP alvo}/tmp -U {usuario alvo}`
+
+Após rodar comando acima, digitamos a senha do usuario e entramos no SMB do host alvo.
+
+![alt text](smb.png)
