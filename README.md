@@ -18,7 +18,7 @@ Instalação simples de realizar, sem nenhuma configuração diferente, basicame
 
 Após baixarmos a imagem ISO do Kali Linux, criamos a máquina virtual, e a configuracao que devemos fazer, é deixar ela em rede interna`(host-only)`.
 
-![alt text](image.png)
+![alt text](kali.png)
 
 ### Criação da máquina virtual com Metasploitable 2
 
