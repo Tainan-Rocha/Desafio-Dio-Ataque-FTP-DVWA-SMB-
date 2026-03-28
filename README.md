@@ -72,3 +72,21 @@ Para acessar a porta 21(FTP), realizamos o comando `ftp {IP alvo}`, será solici
 ![alt text](msfadmin.png)
 
 Com isso estamos em acesso na porta 21, podemos importar e ou exportar arquivos por exemplo.
+
+## Simulando ataque automatizado com formulário web (DVWA)
+
+Para realizarmos o ataque a um formalario de login WEB, precisamos ter os arquivos de possiveis usuarios e senhas, conforme vimos anteriormente. Além dos arquivos, precisamos ver quais parametros a pagina irá solicitar para automatizar as tentativas de acesso.
+
+Acessamos a URL `http://192.168.56.101/dvwa/login.php`, utilizando o Dev Tools do navegador, podemos ver quais parametros sao esperados na requesicao, na opcao `Network` e `Request`
+
+![alt text](form.png)
+
+Dessa forma, podemos rodar o seguinte comando para que a ferramenta Medusa realize as tentativas de acesso de forma automatizada.
+
+`medusa -h {host} -U {arquivo que possui lista de usuarios} -P {arquivo que possui lista de senhas} -M http \
+-m PAGE: {pagina URL}'/dvwa/login.php' \ 
+-m FORM: {formulario}'username=^USER^&password=^PASS^&Login=Login'`
+
+![alt text](form_u.png)
+
+Conforme visto acima, o medusa realiza as requisicoes, está retornando `Sucess` para todos, pois no corpo HTML nao retorna nenhum parametro de falha, logo todos aparecem como sucesso. Porém o usuario de acesso é `admin` e senha `password`
